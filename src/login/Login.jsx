@@ -2,6 +2,11 @@ import smile from "../assets/smile.png";
 
 const Login = () => {
   return (
+    <>
+    <h1 className="text-4xl text-red-500 font-bold">
+      Tailwind funcionando
+    </h1>
+    
     <div className="flex items-center justify-center min-h-screen bg-gray-50 p-6">
       <div className="w-full max-w-md bg-white p-10 rounded-3xl shadow-sm border border-gray-100">
         
@@ -87,6 +92,7 @@ const Login = () => {
         </form>
       </div>
     </div>
+  </>
   );
 };
 
