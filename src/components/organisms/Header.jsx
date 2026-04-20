@@ -1,13 +1,25 @@
+
+import { useState } from "react";
 import Button from "../atoms/Button";
+import MiniCart from "./MiniCart";
+import { useCartStore } from "../../store/cartStore";
 
 const Header = () => {
+  const [isMiniCartOpen, setIsMiniCartOpen] = useState(false);
+
+  const cartItems = useCartStore((state) => state.cartItems);
+  const total = useCartStore((state) => state.total);
+
+  const cartCount = cartItems.reduce(
+    (acc, item) => acc + item.quantity,
+    0
+  );
+
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-4">
         <div className="flex items-center justify-between text-sm text-slate-500">
-          <div className="hidden md:block">
-            Compra fácil y rápido
-          </div>
+          <div className="hidden md:block">Compra fácil y rápido</div>
 
           <div className="flex items-center gap-4">
             <a href="#" className="hover:text-blue-600">Mi cuenta</a>
@@ -35,8 +47,16 @@ const Header = () => {
             />
           </div>
 
-          <div className="flex items-center gap-3">
-            <Button variant="secondary">Carrito (0)</Button>
+          <div
+            className="relative pb-3"
+            onMouseEnter={() => setIsMiniCartOpen(true)}
+            onMouseLeave={() => setIsMiniCartOpen(false)}
+          >
+            <Button variant="secondary" className="min-w-[200px] justify-center">
+              {cartCount} items | ${total}
+            </Button>
+
+            {isMiniCartOpen && <MiniCart />}
           </div>
         </div>
       </div>
