@@ -7,16 +7,16 @@ const ProductCard = ({ product, onAddToCart }) => {
         <img
           src={product.image}
           alt={product.name}
-          className="h-64 w-full object-cover transition duration-300 group-hover:scale-105"
+          className="h-52 w-full object-cover transition duration-300 group-hover:scale-105 sm:h-60 lg:h-64"
         />
       </div>
 
-      <div className="flex flex-1 flex-col gap-3 p-5">
+      <div className="flex flex-1 flex-col gap-3 p-4 sm:p-5">
         <span className="text-xs font-semibold uppercase tracking-wide text-blue-600">
           {product.category}
         </span>
 
-        <h3 className="text-lg font-semibold text-slate-800">
+        <h3 className="line-clamp-2 text-base font-semibold text-slate-800 sm:text-lg">
           {product.name}
         </h3>
 
@@ -24,9 +24,9 @@ const ProductCard = ({ product, onAddToCart }) => {
           {product.description}
         </p>
 
-        <div className="mt-auto flex items-center justify-between pt-2">
+        <div className="mt-auto flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col">
-            <span className="text-xl font-bold text-slate-900">
+            <span className="text-lg font-bold text-slate-900 sm:text-xl">
               ${product.price}
             </span>
             <span className="text-xs text-slate-400">
@@ -36,7 +36,7 @@ const ProductCard = ({ product, onAddToCart }) => {
 
           <Button
             onClick={() => onAddToCart?.(product)}
-            className="px-4 py-2"
+            className="w-full px-4 py-2 sm:w-auto"
           >
             Agregar
           </Button>

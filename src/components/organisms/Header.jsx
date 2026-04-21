@@ -22,29 +22,29 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-4">
-        <div className="flex items-center justify-between text-sm text-slate-500">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-3 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <div className="hidden md:block">Compra fácil y rápido</div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4">
             {currentUser ? (
               <>
-                <span className="font-medium text-slate-700">
+                <span className="text-sm font-medium text-slate-700 sm:text-base">
                   Hola, {currentUser.firstName}
                 </span>
                 <button
                   onClick={logoutUser}
-                  className="font-medium text-red-500 transition hover:text-red-600"
+                  className="text-sm font-medium text-red-500 transition hover:text-red-600 sm:text-base"
                 >
                   Logout
                 </button>
               </>
             ) : (
               <>
-                <Link to="/registro" className="hover:text-blue-600">
+                <Link to="/registro" className="text-sm hover:text-blue-600 sm:text-base">
                   Registro
                 </Link>
-                <Link to="/login" className="hover:text-blue-600">
+                <Link to="/login" className="text-sm hover:text-blue-600 sm:text-base">
                   Login
                 </Link>
               </>
@@ -52,19 +52,19 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
-            <Link to="/">
-              <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div className="min-w-0">
+            <Link to="/" className="inline-block">
+              <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
                 My Store
               </h1>
             </Link>
-            <p className="text-sm text-slate-500">
+            <p className="text-xs text-slate-500 sm:text-sm">
               Inspired by Metronic Shop UI
             </p>
           </div>
 
-          <div className="flex flex-1 items-center gap-3 md:mx-8">
+          <div className="order-3 w-full lg:order-2 lg:mx-8 lg:flex-1">
             <input
               type="text"
               placeholder="Buscar productos..."
@@ -75,11 +75,14 @@ const Header = () => {
           </div>
 
           <div
-            className="relative pb-3"
+            className="relative order-2 w-full lg:order-3 lg:w-auto"
             onMouseEnter={() => setIsMiniCartOpen(true)}
             onMouseLeave={() => setIsMiniCartOpen(false)}
           >
-            <Button variant="secondary" className="min-w-[200px] justify-center">
+            <Button
+              variant="secondary"
+              className="w-full justify-center text-sm sm:text-base lg:min-w-[220px]"
+            >
               {cartCount} items | ${total}
             </Button>
 
