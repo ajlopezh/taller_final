@@ -1,4 +1,5 @@
 import { useCartStore } from "../../store/cartStore";
+import { Link } from "react-router-dom";
 import Button from "../atoms/Button";
 
 const MiniCart = () => {
@@ -69,9 +70,11 @@ const MiniCart = () => {
         </div>
 
         <div className="flex gap-3">
-          <Button variant="secondary" className="flex-1">
-            Ver carrito
-          </Button>
+          <Link to="/cart" className="flex-1">
+            <Button variant="secondary" className="w-full">
+              Ver carrito
+            </Button>
+          </Link>
           <Button className="flex-1">
             Checkout
           </Button>
