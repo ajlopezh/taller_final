@@ -1,8 +1,8 @@
-
 import { useState } from "react";
 import Button from "../atoms/Button";
 import MiniCart from "./MiniCart";
 import { useCartStore } from "../../store/cartStore";
+import { useProductStore } from "../../store/productStore";
 
 const Header = () => {
   const [isMiniCartOpen, setIsMiniCartOpen] = useState(false);
@@ -10,10 +10,10 @@ const Header = () => {
   const cartItems = useCartStore((state) => state.cartItems);
   const total = useCartStore((state) => state.total);
 
-  const cartCount = cartItems.reduce(
-    (acc, item) => acc + item.quantity,
-    0
-  );
+  const searchTerm = useProductStore((state) => state.searchTerm);
+  const setSearchTerm = useProductStore((state) => state.setSearchTerm);
+
+  const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
@@ -43,6 +43,8 @@ const Header = () => {
             <input
               type="text"
               placeholder="Buscar productos..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
             />
           </div>
