@@ -143,7 +143,9 @@ const ShoppingCart = () => {
           </div>
 
           <div className="mt-8 flex flex-col gap-4">
-            <Button>Ir a checkout</Button>
+            <Link to="/checkout">
+              <Button className="w-full">Ir a checkout</Button>
+            </Link>
 
             <Link to="/">
               <Button variant="secondary" className="w-full">
