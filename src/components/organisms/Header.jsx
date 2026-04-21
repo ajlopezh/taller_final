@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Button from "../atoms/Button";
 import MiniCart from "./MiniCart";
 import { useCartStore } from "../../store/cartStore";
 import { useProductStore } from "../../store/productStore";
+import { useUserStore } from "../../store/userStore";
 
 const Header = () => {
   const [isMiniCartOpen, setIsMiniCartOpen] = useState(false);
@@ -13,6 +15,9 @@ const Header = () => {
   const searchTerm = useProductStore((state) => state.searchTerm);
   const setSearchTerm = useProductStore((state) => state.setSearchTerm);
 
+  const currentUser = useUserStore((state) => state.currentUser);
+  const logoutUser = useUserStore((state) => state.logoutUser);
+
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
@@ -22,18 +27,38 @@ const Header = () => {
           <div className="hidden md:block">Compra fácil y rápido</div>
 
           <div className="flex items-center gap-4">
-            <a href="#" className="hover:text-blue-600">Mi cuenta</a>
-            <a href="#" className="hover:text-blue-600">Wishlist</a>
-            <a href="#" className="hover:text-blue-600">Checkout</a>
-            <a href="#" className="hover:text-blue-600">Login</a>
+            {currentUser ? (
+              <>
+                <span className="font-medium text-slate-700">
+                  Hola, {currentUser.firstName}
+                </span>
+                <button
+                  onClick={logoutUser}
+                  className="font-medium text-red-500 transition hover:text-red-600"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/registro" className="hover:text-blue-600">
+                  Registro
+                </Link>
+                <Link to="/login" className="hover:text-blue-600">
+                  Login
+                </Link>
+              </>
+            )}
           </div>
         </div>
 
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900">
-              My Store
-            </h1>
+            <Link to="/">
+              <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+                My Store
+              </h1>
+            </Link>
             <p className="text-sm text-slate-500">
               Inspired by Metronic Shop UI
             </p>
