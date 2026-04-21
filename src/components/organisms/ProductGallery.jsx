@@ -1,13 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import ProductCard from "../molecules/ProductCard";
-import { mockProducts } from "../../mockdata/products";
 import { useProductStore } from "../../store/productStore";
 import { useCartStore } from "../../store/cartStore";
 
 const PRODUCTS_PER_PAGE = 6;
 
 const ProductGallery = () => {
-  const setProducts = useProductStore((state) => state.setProducts);
   const filteredProducts = useProductStore((state) => state.filteredProducts);
   const searchTerm = useProductStore((state) => state.searchTerm);
   const activeCategory = useProductStore((state) => state.activeCategory);
@@ -15,10 +13,6 @@ const ProductGallery = () => {
   const addToCart = useCartStore((state) => state.addToCart);
 
   const [currentPage, setCurrentPage] = useState(1);
-
-  useEffect(() => {
-    setProducts(mockProducts);
-  }, [setProducts]);
 
   useEffect(() => {
     setCurrentPage(1);

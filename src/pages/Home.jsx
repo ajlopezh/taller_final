@@ -1,8 +1,16 @@
+import { useEffect } from "react";
 import Header from "../components/organisms/Header";
 import Footer from "../components/organisms/Footer";
 import ProductGallery from "../components/organisms/ProductGallery";
+import { useProductStore } from "../store/productStore";
 
 const Home = () => {
+  const { fetchProductsFromApi, isLoading, error } = useProductStore();
+
+  useEffect(() => {
+    fetchProductsFromApi();
+  }, [fetchProductsFromApi]);
+
   return (
     <div className="min-h-screen bg-slate-50">
       <Header />
@@ -23,7 +31,19 @@ const Home = () => {
           </p>
         </section>
 
-        <ProductGallery />
+        {isLoading && (
+          <div className="rounded-2xl border border-slate-200 bg-white px-6 py-10 text-center text-slate-500 shadow-sm">
+            Cargando productos...
+          </div>
+        )}
+
+        {error && !isLoading && (
+          <div className="rounded-2xl border border-red-200 bg-red-50 px-6 py-10 text-center text-red-600 shadow-sm">
+            Error: {error}
+          </div>
+        )}
+
+        {!isLoading && !error && <ProductGallery />}
       </main>
 
       <Footer />
